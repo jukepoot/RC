@@ -1,0 +1,32 @@
+function myFunction() {
+  //highlight cell if text in cell is found in another column
+  //I found learnign about macro or function to be harder than writing this.
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var first = ss.getSheetByName("Sheet1");
+  var second = ss.getSheetByName("Sheet2");
+  //I had my data sets in different sheets.
+
+  var range = second.getRange("B2:B5"); //range of column  with the text I want to find.
+  var values = range.getValues();
+
+  var main_range = first.getRange("I2:I7"); //collumn that has the text I am looking in.
+  var main_values = main_range.getValues();
+
+
+  for(var i = 0; i< main_values.length; i++){
+
+    var main_w = main_values[i][0]
+    for(var e = 0; e < values.length; e++){
+
+      if(main_w.includes(values[e][0])){
+        //console.log("found match at " + " I" + (i+2) )
+      //highlight cell green
+      first.getRange("I"+(i+2)).setBackground("green")
+      }
+
+    }
+
+
+  }
+}
